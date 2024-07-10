@@ -95,3 +95,18 @@ class DAO():
             return x
         else:
             return None
+        
+        
+    def regCredenciales(self,User:Credencial):
+        self.__conectar()
+        sql = "INSERT INTO `Credenciales`(`Usuario`, `Contrasena`, `Clase`) VALUES (%s,%s,%s)"
+        values = (User.get_Usuario,User.get_Contrasena,User.get_Clase)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT Usuario , Contrasena FROM Credenciales WHERE Usuario == %s AND Contrasena == %s"
+        self.__cursor.execute(sql2)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None

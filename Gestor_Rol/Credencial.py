@@ -9,7 +9,7 @@ class Credencial():
     def set_Contrasena(self,Contrasena):
         self.__Contrasena = Contrasena
     def set_Clase(self,Clase):
-        self.__Clase
+        self.__Clase = Clase
 
     def get_Usuario(self):
         return self.__Usuario
