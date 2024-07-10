@@ -1,5 +1,5 @@
-from DAO import DAO
+# from DAO import DAO
 
-d = DAO()
-x = d.recCredenciales()
-print(x)
+# d = DAO()
+# x = d.recCredenciales()
+# print(x)
