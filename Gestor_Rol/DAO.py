@@ -208,3 +208,32 @@ class DAO():
             return 1
         else:
             return None
+        
+        # Recuperacion de la tabla Personaje, especificando por nombre de usuario, mostrando solo datos de personajes del usuario seleccionado
+    def recPersonaje(self,Nombre_Usuario):
+        self.__conectar()
+        sql = "SELECT * FROM Personaje WHERE Nombre_Usuario = %s"
+        value = (Nombre_Usuario,)
+        self.__cursor.execute(sql,value)
+        respuesta = self.__cursor.fetchall()
+        lista = []
+        for i in respuesta:
+            registro = Personaje(i[0],i[1],i[2],i[4],i[3],i[5],i[6],i[7],i[8],i[9],i[10],i[11])
+            lista.append(registro)
+        self.__cerrar()
+        return lista
+    
+    def regPersonaje(self,Nombre,Raza,Poder,Habilidad,Equipo1_ID,Equipo2_ID,Equipo3_ID,Equipo4_ID,Equipo5_ID):
+        self.__conectar()
+        sql = "INSERT INTO Personaje('Nombre','RazaID','HabilidadID','PoderID','Equipo1_ID','Equipo2_ID','Equipo3_ID','Equipo4_ID','Equipo5_ID' VALUES %s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values = (Nombre,Raza,Habilidad,Poder,Equipo1_ID,Equipo2_ID,Equipo3_ID,Equipo4_ID,Equipo5_ID)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT * FROM Personaje WHERE 'Nombre' = %s"
+        value = (Nombre,)
+        self.__cursor.execute(sql2,value)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None
