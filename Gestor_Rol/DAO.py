@@ -223,10 +223,11 @@ class DAO():
         self.__cerrar()
         return lista
     
-    def regPersonaje(self,Nombre,Raza,Poder,Habilidad,Equipo1_ID,Equipo2_ID,Equipo3_ID,Equipo4_ID,Equipo5_ID):
+        # Registro y comprobacion de este en la base de datos, se brindan todos lo datos del objeto Personaje menos el nivel, el nombre de usuario y el estado, ya que estos son establecidos en la base de datos y al momento de logearse en el programa
+    def regPersonaje(self,Nombre,Nombre_Usuario,Raza,Poder,Habilidad,Equipo1_ID,Equipo2_ID,Equipo3_ID,Equipo4_ID,Equipo5_ID):
         self.__conectar()
-        sql = "INSERT INTO Personaje('Nombre','RazaID','HabilidadID','PoderID','Equipo1_ID','Equipo2_ID','Equipo3_ID','Equipo4_ID','Equipo5_ID' VALUES %s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        values = (Nombre,Raza,Habilidad,Poder,Equipo1_ID,Equipo2_ID,Equipo3_ID,Equipo4_ID,Equipo5_ID)
+        sql = "INSERT INTO Personaje('Nombre','Nombre_Usuario','RazaID','HabilidadID','PoderID','Equipo1_ID','Equipo2_ID','Equipo3_ID','Equipo4_ID','Equipo5_ID' VALUES %s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        values = (Nombre,Nombre_Usuario,Raza,Habilidad,Poder,Equipo1_ID,Equipo2_ID,Equipo3_ID,Equipo4_ID,Equipo5_ID)
         self.__cursor.execute(sql,values)
         sql2 = "SELECT * FROM Personaje WHERE 'Nombre' = %s"
         value = (Nombre,)
