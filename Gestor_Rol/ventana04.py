@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox
-import ventana1
+import ventana02
 from Credencial import Credencial
 from DAO import DAO
 
 class MyApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("INICIO DE SESION")
+        self.root.title("Crea tu personaje")
         self.root.geometry("210x150")
 
         self.label = tk.Label(root, text="Nombre:")
@@ -16,19 +16,13 @@ class MyApp:
         self.entry = tk.Entry(root)
         self.entry.grid(row=0,column=1,padx=5,pady=5)
 
-        self.label2 = tk.Label(root, text="Contraseña")
-        self.label2.grid(row=1,column=0,padx=5,pady=5)
-
-        self.entry2 = tk.Entry(root,show="*")
-        self.entry2.grid(row=1,column=1,padx=5,pady=5)
-
         self.radio = tk.IntVar()
 
-        self.usuario = tk.Radiobutton(root,text ="Usuario",value=1, variable=self.radio)
-        self.usuario.grid(row=2,column=0,padx=5,pady=5)
-
-        self.gamemaster = tk.Radiobutton(root,text ="Game Master",value=2, variable=self.radio)
-        self.gamemaster.grid(row=2,column=1,padx=5,pady=5)
+        self.opciones = ["Humano", "Elfo", "Enano" , "Argoniano"]
+        self.seleccion = tk.StringVar()
+        self.seleccion.set(self.opciones[0])
+        self.menu = tk.OptionMenu(root, self.seleccion, *self.opciones)
+        self.menu.grid(row=2,column=1,padx=5,pady=5)
 
 
         self.button = tk.Button(root, text="Registrar", command=self.registrar)
@@ -39,25 +33,11 @@ class MyApp:
 
 
     def registrar(self):
-        nombre = self.entry.get().capitalize()
-        contrasena = self.entry2.get()
-        clase = self.radio.get()
-        if clase == 1:
-            clase = "Usuario"
-        else:
-            clase = "GM"
-
-        usuario = Credencial(nombre,contrasena,clase)
-        d = DAO()
-        #c = d.
-
+        pass
 
     def cancelar(self):
         self.root.withdraw()
-        ventana1.main()
-
-
-
+        ventana02.main()
 
 def main():
     root = tk.Tk()
