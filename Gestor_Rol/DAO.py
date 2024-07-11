@@ -19,6 +19,7 @@ class DAO():
         self.__conexion.commit()
         self.__conexion.close()
 
+    # Recuperacion de la tabla Raza, mostrando su id y nombre
     def recRaza(self,Raza_ID):
         self.__conectar()
         sql = "SELECT * FROM Raza WHERE RazaID = %s"
@@ -31,7 +32,8 @@ class DAO():
             return x
         else:
             return None
-        
+
+    # Recuperacion de la tabla Poder, mostrando su nombre, id, raza perteneciente y descripcion    
     def recPoder(self,Raza_ID):
         self.__conectar()
         sql ="SELECT * FROM Poder WHERE RazaID = %s"
@@ -44,7 +46,7 @@ class DAO():
             lista.append(x)
         self.__cerrar()
         return lista
-        
+    # Recuperacion de la tabla Habilidad, mostrando su nombre, id, raza perteneciente y descripcion    
     def recHabilidad(self,Raza_ID):
         self.__conectar()
         sql = "SELECT * FROM Habilidad WHERE RazaID = %s"
@@ -58,6 +60,7 @@ class DAO():
         self.__cerrar()
         return lista
     
+    # Recuperacion de la tabla Equipo, mostrando su nombre, id y tipo de equipo
     def recEquipo(self,Tipo_Equipo):
         self.__conectar()
         sql = "SELECT * FROM Equipamiento WHERE Tipo_Equipamiento = %s"
@@ -71,6 +74,7 @@ class DAO():
         self.__cerrar()
         return lista
     
+    # recuperacion de la tabla Estado, mostrando su nombre, id, descripcion y efecto
     def recEstado(self):
         self.__conectar()
         sql = "SELECT * FROM Estado"
@@ -83,6 +87,7 @@ class DAO():
         self.__cerrar()
         return lista
     
+    # Recuperacion de credenciales, cotejadas en el login para poder acceder a la aplicacion
     def recCredenciales(self,User,Pwd):
         self.__conectar()
         sql = "SELECT * FROM Credenciales WHERE Usuario = %s AND Contrasena = %s"
@@ -91,12 +96,6 @@ class DAO():
         respuesta = self.__cursor.fetchone()
         self.__cerrar()
         if respuesta != None:
-<<<<<<< Updated upstream
-            x = Credencial(respuesta[0],respuesta[1])
-            return x
-        else:
-            return None
-=======
             x = Credencial(respuesta[0],respuesta[1],respuesta[2],respuesta[3])
             return x
         else:
@@ -117,10 +116,16 @@ class DAO():
         else:
             return None
         
+        # Registro de Nueva raza, solo se recibe y envia nombre ya que el ID es autoincrementable en la base de datos.
     def regRaza(self,Nombre):
         self.__conectar()
         sql = "INSERT INTO Raza('Nombre) VALUE %s"
         value = (Nombre,)
         self.__cursor.execute(sql,value)
-        respuesta = self.__
->>>>>>> Stashed changes
+        sql2 = "SELECT * FROM Raza WHERE Nombre == %s"
+        self.__cursor.execute(sql2)
+        respuesta = self.__cursor.fetchone()
+        if respuesta != None:
+            return 1
+        else:
+            return None
