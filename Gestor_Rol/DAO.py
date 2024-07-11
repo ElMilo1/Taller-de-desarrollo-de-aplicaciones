@@ -108,7 +108,7 @@ class DAO():
         sql = "INSERT INTO `Credenciales`(`Usuario`, `Contrasena`, `Clase`) VALUES (%s,%s,%s)"
         values = (User.get_Usuario(),User.get_Contrasena(),User.get_Clase())
         self.__cursor.execute(sql,values)
-        sql2 = "SELECT Usuario , Contrasena FROM Credenciales WHERE Usuario == %s AND Contrasena == %s"
+        sql2 = "SELECT Usuario , Contrasena FROM Credenciales WHERE Usuario = '%s' AND Contrasena = '%s'"
         self.__cursor.execute(sql2)
         respuesta = self.__cursor.fetchone()
         self.__cerrar()
