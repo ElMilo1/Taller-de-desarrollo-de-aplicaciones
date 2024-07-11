@@ -1,6 +1,7 @@
 #PAGINA DE USUARIO
 import tkinter as tk
 from tkinter import messagebox
+import ventana04
 
 class MyApp:
     def __init__(self, root):
@@ -22,7 +23,8 @@ class MyApp:
         self.label3.grid(row=5,column=4,padx=5,pady=5)
 
     def update_label(self):
-        pass
+        self.root.withdraw()
+        ventana04.main()
 
     #def set_label_text(self, text):
         # Actualizar el texto del Label
