@@ -110,7 +110,7 @@ class DAO():
         respuesta = self.__cursor.fetchone()
         self.__cerrar()
         if respuesta != None:
-            x = Credencial(respuesta[0],respuesta[1],respuesta[2],respuesta[3])
+            x = Credencial(respuesta[0],respuesta[1],respuesta[2])
             return x
         else:
             return None
@@ -208,4 +208,3 @@ class DAO():
             return 1
         else:
             return None
-        
