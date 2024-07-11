@@ -23,6 +23,7 @@ class DAO():
     def recDetRaza(self):
         self.__conectar()
         sql = "SELECT * FROM Raza"
+        self.__cursor.execute(sql)
         respuesta = self.__cursor.fetchall()
         lista = []
         for i in respuesta:
@@ -207,3 +208,4 @@ class DAO():
             return 1
         else:
             return None
+        
