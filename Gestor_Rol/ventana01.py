@@ -1,7 +1,8 @@
+#INICIAR SESION
 import tkinter as tk
 from tkinter import messagebox
-import ventana2
-import ventana3
+import ventana02
+import ventana03
 
 class MyApp:
     def __init__(self, root):
@@ -34,14 +35,14 @@ class MyApp:
         if usuario  == "admin" and contrasena =="1234":
             messagebox.showinfo("Inicio de sesion.", "Inicio de sesion exitoso.")
             self.root.withdraw()
-            ventana2.ventana2()
+            ventana02.ventana2()
 
         else:
             messagebox.showinfo("Error","Nombre de usuario o contraseña incorrectos.")
 
     def registrar(self):
         self.root.withdraw()
-        ventana3.main()
+        ventana03.main()
 
     #def set_label_text(self, text):
         # Actualizar el texto del Label
