@@ -91,7 +91,36 @@ class DAO():
         respuesta = self.__cursor.fetchone()
         self.__cerrar()
         if respuesta != None:
+<<<<<<< Updated upstream
             x = Credencial(respuesta[0],respuesta[1])
             return x
         else:
             return None
+=======
+            x = Credencial(respuesta[0],respuesta[1],respuesta[2],respuesta[3])
+            return x
+        else:
+            return None
+        
+        # Registro de usuario, y previo al registro de datos, realiza una query de busqueda donde, al encontrar los datos guardados, retorna 1 comprobando que se realizo el registro con exito
+    def regCredenciales(self,User:Credencial):
+        self.__conectar()
+        sql = "INSERT INTO `Credenciales`(`Usuario`, `Contrasena`, `Clase`) VALUES (%s,%s,%s)"
+        values = (User.get_Usuario,User.get_Contrasena,User.get_Clase)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT Usuario , Contrasena FROM Credenciales WHERE Usuario == %s AND Contrasena == %s"
+        self.__cursor.execute(sql2)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None
+        
+    def regRaza(self,Nombre):
+        self.__conectar()
+        sql = "INSERT INTO Raza('Nombre) VALUE %s"
+        value = (Nombre,)
+        self.__cursor.execute(sql,value)
+        respuesta = self.__
+>>>>>>> Stashed changes
