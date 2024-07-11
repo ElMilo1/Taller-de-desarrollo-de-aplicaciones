@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 import ventana1
-from Gestor_Rol import Credencial
-from Gestor_Rol import DAO
+from Credencial import Credencial
+from DAO import DAO
 
 class MyApp:
     def __init__(self, root):
@@ -48,6 +48,8 @@ class MyApp:
             clase = "GM"
 
         usuario = Credencial(nombre,contrasena,clase)
+        d = DAO()
+        #c = d.
 
 
     def cancelar(self):
