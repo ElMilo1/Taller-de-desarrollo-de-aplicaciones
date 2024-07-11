@@ -9,7 +9,20 @@ class MyApp:
     def __init__(self, root):
         self.root = root
         self.root.title("INICIO DE SESION")
-        self.root.geometry("210x150")
+        self.root.resizable(0,0)
+        window_width = 210
+        window_height = 150
+
+        # Obtener el tamaño de la pantalla
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+
+        # Calcular la posición del centro
+        position_top = int((screen_height / 2) - (window_height / 2))
+        position_right = int((screen_width / 2) - (window_width / 2))
+
+        # Establecer la geometría de la ventana
+        self.root.geometry(f'{window_width}x{window_height}+{position_right}+{position_top}')
 
         self.label = tk.Label(root, text="Nombre:")
         self.label.grid(row=0,column=0,padx=5,pady=5)
