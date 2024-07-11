@@ -3,6 +3,7 @@ from tkinter import messagebox
 import ventana02
 from Credencial import Credencial
 from DAO import DAO
+from Raza import Raza
 
 class MyApp:
     def __init__(self, root):
@@ -16,11 +17,11 @@ class MyApp:
         self.entry = tk.Entry(root)
         self.entry.grid(row=0,column=1,padx=5,pady=5)
 
-        self.radio = tk.IntVar()
 
-        self.opciones = ["Humano", "Elfo", "Enano" , "Argoniano"]
+        self.opciones = self.recuperar_raza()
         self.seleccion = tk.StringVar()
         self.seleccion.set(self.opciones[0])
+
         self.menu = tk.OptionMenu(root, self.seleccion, *self.opciones)
         self.menu.grid(row=2,column=1,padx=5,pady=5)
 
@@ -31,6 +32,12 @@ class MyApp:
         self.button = tk.Button(root, text="Cancelar", command=self.cancelar)
         self.button.grid(row=4,columnspan=2,pady=0)
 
+    def recuperar_raza(self):
+        d = DAO()
+        datos = d.recDetRaza()
+        opciones = [i.get_Nombre() for i in datos]
+        return opciones
+        
 
     def registrar(self):
         pass

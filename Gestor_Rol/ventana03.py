@@ -33,7 +33,7 @@ class MyApp:
 
 
         self.button = tk.Button(root, text="Registrar", command=self.registrar)
-        self.button.grid(row=3,columnspan=2,pady=0)
+        self.button.grid(row=3,columnspan=2,pady=0) 
 
         self.button = tk.Button(root, text="Cancelar", command=self.cancelar)
         self.button.grid(row=4,columnspan=2,pady=0)
