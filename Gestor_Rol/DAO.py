@@ -19,6 +19,18 @@ class DAO():
         self.__conexion.commit()
         self.__conexion.close()
 
+    # Recuperacion de toda la tabla raza
+    def recDetRaza(self):
+        self.__conectar()
+        sql = "SELECT * FROM Raza"
+        respuesta = self.__cursor.fetchall()
+        lista = []
+        for i in respuesta:
+            x = Raza(i[0],i[1])
+            lista.append(x)
+        self.__cerrar()
+        return lista
+
     # Recuperacion de la tabla Raza, mostrando su id y nombre
     def recRaza(self,Raza_ID):
         self.__conectar()
@@ -120,17 +132,78 @@ class DAO():
         # Registro de Nueva raza, solo se recibe y envia nombre ya que el ID es autoincrementable en la base de datos.
     def regRaza(self,Nombre):
         self.__conectar()
-        sql = "INSERT INTO Raza('Nombre) VALUE %s"
+        sql = "INSERT INTO Raza('Nombre') VALUE %s"
         value = (Nombre,)
         self.__cursor.execute(sql,value)
-        sql2 = "SELECT * FROM Raza WHERE Nombre == %s"
+        sql2 = "SELECT * FROM Raza WHERE Nombre = %s"
         self.__cursor.execute(sql2)
         respuesta = self.__cursor.fetchone()
+        self.__cerrar()
         if respuesta != None:
             return 1
         else:
             return None
         
-    def regPoder(self,Raza_ID,Nombre_Poder,Descripcion,Estado):
+        # Registro de nuevo poder, recibiendo nombre, id de raza correspondiente y descripcion, resto de datos se aplican en la base de datos
+    def regPoder(self,Raza_ID,Nombre_Poder,Descripcion):
         self.__conectar()
-        sql = "INSERT INTO Poder()"
+        sql = "INSERT INTO 'Poder'('RazaID','Nombre_Poder','Descripcion') VALUES %s ,%s, %s"
+        values = (Raza_ID,Nombre_Poder,Descripcion)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT* FROM 'Poder' WHERE 'Nombre_Poder' = %s"
+        value = (Nombre_Poder,)
+        self.__cursor.execute(sql2,value)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None
+        
+        # Registro de nueva habilidad, recibiendo nombre, id de raza correspondiente y descripcion, resto de datos se aplican en la base de datos
+    def regHabilidad(self,Raza_ID,Nombre_Habilidad,Descripcion):
+        self.__conectar()
+        sql = "INSERT INTO 'Habilidad'('RazaID','Nombre_Habilidad','Descripcion') VALUES %s ,%s, %s"
+        values = (Raza_ID,Nombre_Habilidad,Descripcion)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT* FROM 'Habilidad' WHERE 'Nombre_Habilidad' = %s"
+        value = (Nombre_Habilidad,)
+        self.__cursor.execute(sql2,value)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None
+        
+        # Registro de nuevo estado, recibiendo nombre, Descripcion y efecto de este, id y estado se aplican en la base de datos
+    def regEstado(self,Nombre,Descripcion,Efecto):
+        self.__conectar()
+        sql = "INSERT INTO 'Estado'('Nombre','Descripcion','Efecto') VALUES %s, %s , %s"
+        values = (Nombre,Descripcion,Efecto)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT * FROM 'Estado' WHERE 'Nombre' = %s"
+        value = (Nombre,)
+        self.__cursor.execute(sql2,value)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None
+        
+        # Registro de nuevo equipo, recibiendo nombre y tipo de equipo, ya que estado y Id se aplican en base de datos
+    def regEquipo(self,Nombre_Equipo,Tipo_Equipo):
+        self.__conectar()
+        sql = "INSERT INTO 'Equipamiento'('Nombre_Equipo','Tipo_Equipamiento') VALUES %s, %s"
+        values =(Nombre_Equipo,Tipo_Equipo)
+        self.__cursor.execute(sql,values)
+        sql2 = "SELECT * FROM 'Equipamiento' WHERE 'Nombre_Equipo' = %s"
+        value = (Nombre_Equipo,)
+        self.__cursor.execute(sql2,value)
+        respuesta = self.__cursor.fetchone()
+        self.__cerrar()
+        if respuesta != None:
+            return 1
+        else:
+            return None
