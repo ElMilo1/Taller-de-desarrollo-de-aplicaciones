@@ -46,6 +46,7 @@ class DAO():
             lista.append(x)
         self.__cerrar()
         return lista
+    
     # Recuperacion de la tabla Habilidad, mostrando su nombre, id, raza perteneciente y descripcion    
     def recHabilidad(self,Raza_ID):
         self.__conectar()
@@ -105,7 +106,7 @@ class DAO():
     def regCredenciales(self,User:Credencial):
         self.__conectar()
         sql = "INSERT INTO `Credenciales`(`Usuario`, `Contrasena`, `Clase`) VALUES (%s,%s,%s)"
-        values = (User.get_Usuario,User.get_Contrasena,User.get_Clase)
+        values = (User.get_Usuario(),User.get_Contrasena(),User.get_Clase())
         self.__cursor.execute(sql,values)
         sql2 = "SELECT Usuario , Contrasena FROM Credenciales WHERE Usuario == %s AND Contrasena == %s"
         self.__cursor.execute(sql2)
@@ -129,3 +130,7 @@ class DAO():
             return 1
         else:
             return None
+        
+    def regPoder(self,Raza_ID,Nombre_Poder,Descripcion,Estado):
+        self.__conectar()
+        sql = "INSERT INTO Poder()"
