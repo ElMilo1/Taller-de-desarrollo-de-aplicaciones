@@ -9,7 +9,7 @@ class MyApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Crea tu personaje")
-        self.root.geometry("210x150")
+        self.root.geometry("230x150")
 
         self.label = tk.Label(root, text="Nombre:")
         self.label.grid(row=0,column=0,padx=5,pady=5)
@@ -23,8 +23,11 @@ class MyApp:
         self.seleccion.set(self.opciones[0])
 
         self.menu = tk.OptionMenu(root, self.seleccion, *self.opciones)
-        self.menu.grid(row=2,column=1,padx=5,pady=5)
+        self.menu.grid(row=1,column=1,padx=5,pady=5)
 
+        self.label_select = tk.Label(root, text=f"raza seleccionada: {self.seleccion.get()}")
+        self.label_select.grid(row=2,column=1,padx=4,pady=2)
+        self.seleccion.trace("w",self.actualizar_label)
 
         self.button = tk.Button(root, text="Registrar", command=self.registrar)
         self.button.grid(row=3,columnspan=2,pady=0)
@@ -37,14 +40,17 @@ class MyApp:
         datos = d.recDetRaza()
         opciones = [i.get_Nombre() for i in datos]
         return opciones
-        
+    
+    def actualizar_label(self, *args):
+        self.label_select.config(text=f"Raza seleccionada: {self.seleccion.get()}")
 
     def registrar(self):
-        pass
+        nombre = self.entry.get()
+        raza = self.seleccion.get()
 
     def cancelar(self):
         self.root.withdraw()
-        ventana02.main()
+        ventana02.ventana2()
 
 def main():
     root = tk.Tk()
