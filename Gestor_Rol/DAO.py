@@ -19,6 +19,7 @@ class DAO():
         self.__conexion.commit()
         self.__conexion.close()
 
+    # Recuperacion de la tabla Raza, mostrando su id y nombre
     def recRaza(self,Raza_ID):
         self.__conectar()
         sql = "SELECT * FROM Raza WHERE RazaID = %s"
@@ -31,7 +32,7 @@ class DAO():
             return x
         else:
             return None
-        
+        # Recuperacion de la tabla Poder, mostrando su nombre, id, raza perteneciente y descripcion
     def recPoder(self,Raza_ID):
         self.__conectar()
         sql ="SELECT * FROM Poder WHERE RazaID = %s"
@@ -45,6 +46,7 @@ class DAO():
         self.__cerrar()
         return lista
         
+        # Recuperacion de la tabla Habilidad, mostrando su nombre, id, raza perteneciente y descripcion
     def recHabilidad(self,Raza_ID):
         self.__conectar()
         sql = "SELECT * FROM Habilidad WHERE RazaID = %s"
@@ -58,6 +60,7 @@ class DAO():
         self.__cerrar()
         return lista
     
+    # Recuperacion de la tabla Equipo, mostrando su nombre, id y tipo de equipo
     def recEquipo(self,Tipo_Equipo):
         self.__conectar()
         sql = "SELECT * FROM Equipamiento WHERE Tipo_Equipamiento = %s"
@@ -71,6 +74,7 @@ class DAO():
         self.__cerrar()
         return lista
     
+    # recuperacion de la tabla Estado, mostrando su nombre, id, descripcion y efecto
     def recEstado(self):
         self.__conectar()
         sql = "SELECT * FROM Estado"
@@ -83,6 +87,7 @@ class DAO():
         self.__cerrar()
         return lista
     
+    # Recuperacion de credenciales, cotejadas en el login para poder acceder a la aplicacion
     def recCredenciales(self,User,Pwd):
         self.__conectar()
         sql = "SELECT * FROM Credenciales WHERE Usuario = %s AND Contrasena = %s"
@@ -96,7 +101,7 @@ class DAO():
         else:
             return None
         
-        
+        # Registro de usuario, y previo al registro de datos, realiza una query de busqueda donde, al encontrar los datos guardados, retorna 1 comprobando que se realizo el registro con exito
     def regCredenciales(self,User:Credencial):
         self.__conectar()
         sql = "INSERT INTO `Credenciales`(`Usuario`, `Contrasena`, `Clase`) VALUES (%s,%s,%s)"
