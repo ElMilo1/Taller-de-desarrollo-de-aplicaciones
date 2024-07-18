@@ -8,7 +8,7 @@ from DAO import DAO
 class MyApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("INICIO DE SESION")
+        self.root.title("CREA TU CUENTA")
         self.root.resizable(0,0)
         window_width = 210
         window_height = 150
